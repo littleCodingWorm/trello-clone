@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Footer = () => {
   return (
-    <footer className="flex w-full items-center justify-center p-2">
+    <footer className="fixed bottom-0 left-0 flex w-full items-center justify-center p-2">
       <nav className="flex w-full max-w-screen-lg items-center justify-between">
         <Logo hideNameOnMobile={false} />
         <div className="flex items-center justify-center gap-3 text-sm font-[600]">
