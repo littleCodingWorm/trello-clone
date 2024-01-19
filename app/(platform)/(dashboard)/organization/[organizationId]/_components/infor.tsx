@@ -18,7 +18,7 @@ const Infor = ({ isPro }: { isPro: boolean }) => {
       </div>
       <div className="flex flex-col gap-2">
         <div className="font-bold">{organization?.name}</div>
-        <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
+        <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground">
           <CreditCard className="h-4 w-4" />
           {isPro ? "Pro" : "Free"}
         </div>
