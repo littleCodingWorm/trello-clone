@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
-import Logo from "./logo";
+import Logo from "../../../components/logo";
 
 const Navbar = () => {
   return (
