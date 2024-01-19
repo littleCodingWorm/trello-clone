@@ -18,7 +18,7 @@ const Sidebar = () => {
           </Button>
           <Button className="w-full" variant="ghost">
             Boards
-          </Button>{" "}
+          </Button>
           <Button className="w-full" variant="ghost">
             Boards
           </Button>
