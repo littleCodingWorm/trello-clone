@@ -1,9 +1,9 @@
-import React from "react";
 import Logo from "@/components/logo";
+import React from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { MobileSidebar } from "./mobile-sidebar";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -22,7 +22,9 @@ const Navbar = () => {
           </Button>
         </div>
         <div className="flex items-baseline gap-2">
-          <OrganizationSwitcher />
+          <div className="hidden sm:block">
+            <OrganizationSwitcher />
+          </div>
           <UserButton afterSignOutUrl="/" />
         </div>
       </nav>

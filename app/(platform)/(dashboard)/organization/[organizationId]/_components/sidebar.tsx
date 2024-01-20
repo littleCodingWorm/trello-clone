@@ -1,42 +1,28 @@
+"use client";
+
 import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+import NavItem from "./nav-item";
+import { Accordion } from "@/components/ui/accordion";
+import { useOrganization, useOrganizationList } from "@clerk/nextjs";
+
+import { Organization } from "./nav-item";
 
 const Sidebar = () => {
+  // get the org list
+  const { organization, isLoaded: isLoadedOrg } = useOrganization();
+  const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
+    userMemberships: {
+      infinite: true,
+    },
+  });
   return (
     <Accordion type="multiple" className="w-full">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Org name</AccordionTrigger>
-        <AccordionContent>
-          <Button className="w-full" variant="ghost">
-            Boards
-          </Button>
-          <Button className="w-full" variant="ghost">
-            Boards
-          </Button>
-          <Button className="w-full" variant="ghost">
-            Boards
-          </Button>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It comes with default styles that matches the other
-          components&apos; aesthetic.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It's animated by default, but you can disable it if you prefer.
-        </AccordionContent>
-      </AccordionItem>
+      {userMemberships.data?.map(({ organization }) => (
+        <NavItem
+          key={organization.id}
+          organization={organization as Organization}
+        />
+      ))}
     </Accordion>
   );
 };

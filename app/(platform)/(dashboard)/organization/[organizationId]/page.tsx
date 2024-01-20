@@ -2,6 +2,7 @@ import { UserRound } from "lucide-react";
 import React from "react";
 import Hint from "./_components/hint";
 import Infor from "./_components/infor";
+import Link from "next/link";
 
 const OrganizationIdPage = () => {
   return (
@@ -15,23 +16,13 @@ const OrganizationIdPage = () => {
             <UserRound /> Your board
           </h1>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            <div
-              role="button"
-              className="aspect-video rounded bg-sky-600 p-3 font-bold text-white"
-            >
-              board
-            </div>
-            <div
-              role="button"
-              className="aspect-video rounded bg-sky-600 p-3 font-bold text-white"
-            >
-              board
-            </div>
-            <div
-              role="button"
-              className="aspect-video rounded bg-sky-600 p-3 font-bold text-white"
-            >
-              board
+            <div className="aspect-video rounded bg-sky-600 font-bold text-white">
+              <Link
+                className="inline-block h-full w-full p-3"
+                href="/board/boardIdForlater"
+              >
+                board
+              </Link>
             </div>
             <div
               role="button"
