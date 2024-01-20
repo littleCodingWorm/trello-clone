@@ -21,16 +21,19 @@ const ListContainer = () => {
         {
           name: "card1",
           id: "c1",
+          listId: "1",
           order: 0,
         },
         {
           name: "card2",
           id: "c2",
+          listId: "1",
           order: 1,
         },
         {
           name: "card3",
           id: "c3",
+          listId: "1",
           order: 2,
         },
       ],
@@ -43,16 +46,19 @@ const ListContainer = () => {
         {
           name: "card1",
           id: "c4",
+          listId: "2",
           order: 1,
         },
         {
           name: "card2",
           id: "c5",
+          listId: "2",
           order: 2,
         },
         {
           name: "card3",
           id: "c6",
+          listId: "2",
           order: 3,
         },
       ],
@@ -65,11 +71,13 @@ const ListContainer = () => {
         {
           name: "card1",
           id: "c7",
+          listId: "3",
           order: 0,
         },
         {
           name: "card2",
           id: "c8",
+          listId: "3",
           order: 1,
         },
       ],
@@ -82,10 +90,81 @@ const ListContainer = () => {
     console.log("dest", destination);
     console.log("source", source);
     console.log("type", type);
-    const items = reorder(orderedData, source.index, destination.index).map(
-      (item, index) => ({ ...item, order: index }),
-    );
-    setOrderedData(items);
+    // if user doesn't drop it
+    if (!destination) return;
+
+    // handle list reorder
+    if (type === "list") {
+      const items = reorder(orderedData, source.index, destination.index).map(
+        (item, index) => ({ ...item, order: index }),
+      );
+      setOrderedData(items);
+    }
+
+    // User moves a card
+    if (type === "card") {
+      let newOrderedData = [...orderedData];
+
+      // Source and destination list
+      const sourceList = newOrderedData.find(
+        (list) => list.id === source.droppableId,
+      );
+      const destList = newOrderedData.find(
+        (list) => list.id === destination.droppableId,
+      );
+
+      if (!sourceList || !destList) {
+        return;
+      }
+
+      // Check if cards exists on the sourceList
+      if (!sourceList.cards) {
+        sourceList.cards = [];
+      }
+
+      // Check if cards exists on the destList
+      if (!destList.cards) {
+        destList.cards = [];
+      }
+
+      // Moving the card in the same list
+      if (source.droppableId === destination.droppableId) {
+        const reorderedCards = reorder(
+          sourceList.cards,
+          source.index,
+          destination.index,
+        );
+
+        reorderedCards.forEach((card, idx) => {
+          card.order = idx;
+        });
+
+        sourceList.cards = reorderedCards;
+
+        setOrderedData(newOrderedData);
+        // User moves the card to another list
+      } else {
+        // Remove card from the source list
+        const [movedCard] = sourceList.cards.splice(source.index, 1);
+
+        // Assign the new listId to the moved card
+        movedCard.listId = destination.droppableId;
+
+        // Add card to the destination list
+        destList.cards.splice(destination.index, 0, movedCard);
+
+        sourceList.cards.forEach((card, idx) => {
+          card.order = idx;
+        });
+
+        // Update the order for each card in the destination list
+        destList.cards.forEach((card, idx) => {
+          card.order = idx;
+        });
+
+        setOrderedData(newOrderedData);
+      }
+    }
   }
 
   return (
@@ -101,7 +180,7 @@ const ListContainer = () => {
             className="flex gap-4"
           >
             {orderedData.map((list, index) => (
-              <ListItem key={list.id} data={list} index={index} />
+              <ListItem key={list.id} list={list} index={index} />
             ))}
             {provided.placeholder}
           </ul>

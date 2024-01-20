@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { MoreHorizontal } from "lucide-react";
 
-const ListItem = ({ data, index }: { data: any; index: number }) => {
+const ListItem = ({ list, index }: { list: any; index: number }) => {
   function handleOnClick() {
     alert("pop up list setting stuff");
   }
   return (
-    <Draggable draggableId={data.id} index={index}>
+    <Draggable draggableId={list.id} index={index}>
       {(provided) => (
         <li
           ref={provided.innerRef}
@@ -21,20 +21,20 @@ const ListItem = ({ data, index }: { data: any; index: number }) => {
           className="h-full w-[272px] rounded-md bg-blue-200 p-2"
         >
           <div className="flex items-center justify-between">
-            <span>{data.name}</span>
+            <span>{list.name}</span>
             <Button onClick={handleOnClick} variant="ghost">
               <MoreHorizontal />
             </Button>
           </div>
-          <Droppable droppableId={data.id} type="card">
+          <Droppable droppableId={list.id} type="card">
             {(provided) => (
               <ul
                 className="mt-4 flex flex-col gap-2"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {data.cards.map((card: any, index: number) => (
-                  <CardItem index={index} data={card} key={card.id} />
+                {list.cards.map((card: any, index: number) => (
+                  <CardItem index={index} card={card} key={card.id} />
                 ))}
 
                 <CardForm />
