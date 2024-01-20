@@ -4,7 +4,7 @@ import { MoreHorizontal } from "lucide-react";
 import React from "react";
 
 const BoardIdLayout = ({ children }: { children: React.ReactNode }) => {
-  function onClickHandler() {
+  function handleOnClick() {
     alert("board setting stuff pop up");
   }
 
@@ -12,7 +12,7 @@ const BoardIdLayout = ({ children }: { children: React.ReactNode }) => {
     <main>
       <div className="flex items-center justify-between bg-blue-200 p-2">
         <span>board's name</span>
-        <Button onClick={() => onClickHandler()} variant="ghost">
+        <Button onClick={handleOnClick} variant="ghost">
           <MoreHorizontal />
         </Button>
       </div>
