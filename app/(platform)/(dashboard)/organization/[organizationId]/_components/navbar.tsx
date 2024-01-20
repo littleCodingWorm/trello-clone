@@ -23,7 +23,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-baseline gap-2">
           <div className="hidden sm:block">
-            <OrganizationSwitcher />
+            <OrganizationSwitcher hidePersonal />
           </div>
           <UserButton afterSignOutUrl="/" />
         </div>
