@@ -9,7 +9,7 @@ const CardForm = () => {
   return (
     <div>
       <Button
-        onClick={() => handleOnClick()}
+        onClick={handleOnClick}
         className="w-full justify-start px-2"
         variant="ghost"
       >
