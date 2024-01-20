@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import StaticGenerationSearchParamsBailoutProvider from "next/dist/client/components/static-generation-searchparams-bailout-provider";
 import Sidebar from "./sidebar";
 
@@ -20,10 +20,13 @@ export function MobileSidebar() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">
-          <Menu />
+          <MenuIcon />
         </Button>
       </SheetTrigger>
       <SheetContent className="pt-10" side="left">
+        <SheetHeader>
+          <SheetTitle>Workspaces</SheetTitle>
+        </SheetHeader>
         <Sidebar />
       </SheetContent>
     </Sheet>

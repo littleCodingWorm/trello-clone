@@ -52,7 +52,8 @@ const NavItem = ({ organization }: { organization: Organization }) => {
           <div className="relative h-7 w-7">
             <Image
               src={organization.imageUrl}
-              fill
+              width={28}
+              height={28}
               alt={organization.name + "image"}
             />
           </div>
@@ -62,6 +63,7 @@ const NavItem = ({ organization }: { organization: Organization }) => {
       <AccordionContent>
         {routes.map((route) => (
           <Button
+            key={route.href}
             onClick={() => handleClick(route.href)}
             className="flex w-full items-center justify-start pl-10"
             variant="ghost"
