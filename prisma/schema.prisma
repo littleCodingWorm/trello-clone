@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Board {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  orgId String
+  title String
+  lists List[]
+}
+
+model List {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  order Int
+
+  Board Board? @relation(fields: [boardId], references: [id])
+
+  boardId String? @db.ObjectId
+  cards   Card[]
+}
+
+model Card {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  order       Int
+  description String?
+  List        List?   @relation(fields: [listId], references: [id])
+  listId      String? @db.ObjectId
+}
