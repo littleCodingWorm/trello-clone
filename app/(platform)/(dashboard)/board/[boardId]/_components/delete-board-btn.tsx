@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { DeleteBoard } from "@/actions/delete-board";
+import { Button } from "@/components/ui/button";
 
 const DeleteBoardBtn = ({ boardId }: { boardId: string }) => {
   const router = useRouter();

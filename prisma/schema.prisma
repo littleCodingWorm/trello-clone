@@ -19,12 +19,10 @@ model Board {
 }
 
 model List {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  title String
-  order Int
-
-  Board Board? @relation(fields: [boardId], references: [id])
-
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  title   String
+  order   Int
+  Board   Board?  @relation(fields: [boardId], references: [id])
   boardId String? @db.ObjectId
   cards   Card[]
 }
