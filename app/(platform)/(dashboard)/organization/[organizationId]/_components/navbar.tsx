@@ -8,7 +8,7 @@ import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 const Navbar = () => {
   return (
     <header className="flex w-full items-center justify-center">
-      <nav className="flex w-full max-w-screen-lg items-center justify-between border-b p-2 ">
+      <nav className="flex w-full items-center justify-between border-b p-2 ">
         <div className="flex items-center justify-center gap-4">
           <div className="md:hidden">
             <MobileSidebar />
