@@ -24,7 +24,8 @@ model List {
   order   Int
   Board   Board?  @relation(fields: [boardId], references: [id])
   boardId String? @db.ObjectId
-  cards   Card[]
+
+  cards Card[]
 }
 
 model Card {

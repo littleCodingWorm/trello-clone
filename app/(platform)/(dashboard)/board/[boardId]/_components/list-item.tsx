@@ -21,7 +21,7 @@ const ListItem = ({ list, index }: { list: any; index: number }) => {
           className="h-full w-[272px] rounded-md bg-blue-200 p-2"
         >
           <div className="flex items-center justify-between">
-            <span>{list.name}</span>
+            <span>{list.title}</span>
             <Button onClick={handleOnClick} variant="ghost">
               <MoreHorizontal />
             </Button>

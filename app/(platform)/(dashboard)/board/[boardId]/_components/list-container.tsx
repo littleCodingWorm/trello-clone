@@ -1,9 +1,10 @@
 "use client";
 
 import ListItem from "./list-item";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { ListWithCards } from "@/types";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import ListForm from "./list-form";
 
 function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   const result = Array.from(list);
@@ -13,9 +14,20 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   return result;
 }
 
-const ListContainer = ({ lists }: { lists: ListWithCards[] }) => {
+const ListContainer = ({
+  lists,
+  boardId,
+}: {
+  lists: ListWithCards[];
+  boardId: string;
+}) => {
   // fetch lists of this dude?
   const [orderedData, setOrderedData] = useState(lists);
+
+  // real time whenever the list is updated
+  useEffect(() => {
+    setOrderedData(lists);
+  }, [lists]);
 
   function handleOnDragEnd(result: any) {
     const { destination, type, source } = result;
@@ -112,6 +124,7 @@ const ListContainer = ({ lists }: { lists: ListWithCards[] }) => {
               <ListItem key={list.id} list={list} index={index} />
             ))}
             {provided.placeholder}
+            <ListForm boardId={boardId} />
           </ul>
         )}
       </Droppable>

@@ -20,7 +20,7 @@ export const CreateBoard = async (createBoardData: Board) => {
       data: createBoardData,
     });
   } catch (error) {
-    throw new Error("invalid create board data");
+    throw new Error("fail to create board");
   }
 
   revalidatePath(`/board/${createdBoard.id}`);
