@@ -1,20 +1,20 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
 import React from "react";
+import BoardMenu from "./_components/board-menu";
 
-const BoardIdLayout = ({ children }: { children: React.ReactNode }) => {
-  function handleOnClick() {
-    alert("board setting stuff pop up");
-  }
+const BoardIdLayout = ({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { boardId: string };
+}) => {
+  const { boardId } = params;
 
   return (
     <main>
       <div className="flex items-center justify-between bg-blue-200 p-2">
-        <span>board's name</span>
-        <Button onClick={handleOnClick} variant="ghost">
-          <MoreHorizontal />
-        </Button>
+        <span>Board's name</span>
+        <BoardMenu boardId={boardId} />
       </div>
       <div className="p-4">{children}</div>
     </main>

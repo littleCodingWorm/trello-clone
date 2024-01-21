@@ -8,11 +8,13 @@ export interface Board {
   imageUrl: string;
   orgId: string;
 }
+
 export const CreateBoard = async (createBoardData: Board) => {
+  let createdBoard;
+
   if (!createBoardData) {
     throw new Error("invalid create board data");
   }
-  let createdBoard;
   try {
     createdBoard = await db.board.create({
       data: createBoardData,
@@ -20,6 +22,7 @@ export const CreateBoard = async (createBoardData: Board) => {
   } catch (error) {
     throw new Error("invalid create board data");
   }
+
   revalidatePath(`/board/${createdBoard.id}`);
   return createdBoard;
 };
