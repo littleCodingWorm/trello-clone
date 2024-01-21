@@ -1,15 +1,12 @@
 "use client";
-import * as z from "zod";
 import React from "react";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { unsplash } from "@/lib/unsplash";
 import { FormField } from "../ui/form";
 import { useFormStatus } from "react-dom";
-import { Check, Divide } from "lucide-react";
+import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormPicker = ({ form }: { form: any }) => {
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
@@ -48,7 +45,7 @@ const FormPicker = ({ form }: { form: any }) => {
   return (
     <FormField
       control={form.control}
-      name="image"
+      name="imageUrl"
       render={({ field }) => (
         <div className="grid grid-cols-3 gap-2">
           {images.map((image) => {

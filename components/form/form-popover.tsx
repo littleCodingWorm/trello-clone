@@ -1,11 +1,13 @@
 "use client";
 
-import { sup } from "@/actions/actions";
 import * as z from "zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CreateBoard } from "@/actions/create-board";
+
 import {
   FormControl,
   FormField,
@@ -25,20 +27,27 @@ const formSchema = z.object({
   title: z.string().min(1, {
     message: "Required. A board must be named",
   }),
-  image: z.string(),
+  imageUrl: z.string(),
 });
 
-const FormPopover = () => {
+const FormPopover = ({ orgId }: { orgId: string }) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      image: "",
+      imageUrl: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const createBoardData = {
+      orgId: String(orgId),
+      title: String(values.title),
+      imageUrl: String(values.imageUrl),
+    };
+    const createdBoard = await CreateBoard(createBoardData); // only pass data, not call function like this
+    router.push(`/board/${createdBoard.id}`); // how
   }
 
   return (
