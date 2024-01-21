@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Board {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  orgId String
-  title String
-  lists List[]
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  orgId    String @db.ObjectId
+  title    String
+  imageUrl String
+  lists    List[]
 }
 
 model List {
