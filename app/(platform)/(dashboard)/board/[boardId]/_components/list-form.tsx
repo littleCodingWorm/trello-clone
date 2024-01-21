@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverClose,
@@ -23,12 +22,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { CreateList } from "@/actions/create-list";
 import { useRouter } from "next/navigation";
+import FormSubmit from "@/components/form/form-submit";
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
 });
 
 const ListForm = ({ boardId }: { boardId: string }) => {
+  const [pending, setPending] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
   // 1. Define your form.
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,17 +42,23 @@ const ListForm = ({ boardId }: { boardId: string }) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const title = values.title;
+    function timeout(delay: number) {
+      return new Promise((res) => setTimeout(res, delay));
+    }
+    await timeout(1000);
     const createdList = await CreateList({ title, boardId });
     if (createdList) {
       console.log("success ", createdList);
       router.refresh();
+      setPopoverOpen(false);
     }
+    setPending(true);
     // TODO: make it close after submit
     // TODO: make it blur like loading and can't click
   }
   return (
     <div>
-      <Popover>
+      <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
         <PopoverTrigger className="flex w-full justify-start rounded border border-stone-800 p-2 px-2">
           <Plus />
           Add a List
@@ -65,13 +73,17 @@ const ListForm = ({ boardId }: { boardId: string }) => {
                   <FormItem>
                     <FormLabel>List's title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter list name" {...field} />
+                      <Input
+                        // disabled={pending}
+                        placeholder="Enter list name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <FormSubmit>Submit</FormSubmit>
             </form>
           </Form>
         </PopoverContent>
