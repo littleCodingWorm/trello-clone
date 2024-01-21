@@ -6,8 +6,6 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFormStatus } from "react-dom";
-import { useEffect, useState } from "react";
 import {
   FormControl,
   FormField,
@@ -21,9 +19,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { unsplash } from "@/lib/unsplash";
-import Image from "next/image";
-import { Check, Divide } from "lucide-react";
+import FormPicker from "./form-picker";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -33,12 +29,6 @@ const formSchema = z.object({
 });
 
 const FormPopover = () => {
-  const { pending } = useFormStatus();
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [images, setImages] = useState<Array<Record<string, any>>>([]);
-  const [pickedImageId, setPickedImageId] = useState("");
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,40 +37,8 @@ const FormPopover = () => {
     },
   });
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const result = await unsplash.photos.getRandom({
-          collectionIds: ["317099"],
-          count: 9,
-        });
-
-        if (result && result.response) {
-          const newImages = result.response as Array<Record<string, any>>;
-          setImages(newImages);
-        } else {
-          console.error("Failed to get images from Unsplash");
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchImages();
-  }, []);
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-  }
-
-  useEffect(() => {
-    console.log(pickedImageId);
-  }, [pickedImageId]);
-
-  if (isLoading) {
-    return <div className="flex items-center justify-center p-6">loading</div>;
   }
 
   return (
@@ -90,50 +48,7 @@ const FormPopover = () => {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="image"
-                render={({ field }) => (
-                  <div className="grid grid-cols-3 gap-2">
-                    {images.map((image) => {
-                      return (
-                        <div
-                          key={image.id}
-                          onClick={() => {
-                            if (pending) return;
-                            setPickedImageId(image.id);
-                          }}
-                          className="relative aspect-video"
-                        >
-                          <Input
-                            {...field}
-                            type="radio"
-                            id={image.id}
-                            name={image.id}
-                            disabled={pending}
-                            checked={image.id === pickedImageId}
-                            aria-checked={image.id === pickedImageId}
-                            value={image.urls.full}
-                            className="absolute z-10"
-                            // TODO: hidden the checked but still make it work
-                          />
-                          <Image
-                            src={image.urls.thumb}
-                            alt="Unsplash image"
-                            fill
-                            className="rounded object-cover"
-                          />
-                          {pickedImageId === image.id && (
-                            <div className="absolute inset-y-0 flex h-full w-full items-center justify-center bg-black/30">
-                              <Check className="h-4 w-4 text-white" />
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              />
+              <FormPicker form={form} />
               <FormField
                 control={form.control}
                 name="title"
