@@ -7,7 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { MoreHorizontal } from "lucide-react";
 
-const ListItem = ({ list, index }: { list: any; index: number }) => {
+const ListItem = ({
+  list,
+  index,
+  boardId,
+}: {
+  list: any;
+  index: number;
+  boardId: string;
+}) => {
   function handleOnClick() {
     alert("pop up list setting stuff");
   }
@@ -37,7 +45,7 @@ const ListItem = ({ list, index }: { list: any; index: number }) => {
                   <CardItem index={index} card={card} key={card.id} />
                 ))}
 
-                <CardForm />
+                <CardForm boardId={boardId} listId={list.id} />
                 {provided.placeholder}
               </ul>
             )}

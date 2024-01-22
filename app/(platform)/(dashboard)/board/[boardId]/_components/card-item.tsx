@@ -21,7 +21,7 @@ const CardItem = ({ index, card }: { index: number; card: any }) => {
             className="group rounded-md border border-transparent  bg-yellow-200 hover:border-black"
           >
             <div className="flex items-center justify-between p-2">
-              <span>{card.name}</span>
+              <span>{card.title}</span>
               <Button variant="ghost">
                 <Pen className="hidden h-4 w-4 text-muted-foreground group-hover:block" />
               </Button>

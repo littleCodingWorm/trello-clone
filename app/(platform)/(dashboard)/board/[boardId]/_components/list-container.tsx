@@ -121,7 +121,12 @@ const ListContainer = ({
             className="flex gap-4"
           >
             {orderedData.map((list, index) => (
-              <ListItem key={list.id} list={list} index={index} />
+              <ListItem
+                key={list.id}
+                boardId={boardId}
+                list={list}
+                index={index}
+              />
             ))}
             {provided.placeholder}
             <ListForm boardId={boardId} />

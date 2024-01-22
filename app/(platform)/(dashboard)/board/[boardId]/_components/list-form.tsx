@@ -42,10 +42,6 @@ const ListForm = ({ boardId }: { boardId: string }) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const title = values.title;
-    function timeout(delay: number) {
-      return new Promise((res) => setTimeout(res, delay));
-    }
-    await timeout(1000);
     const createdList = await CreateList({ title, boardId });
     if (createdList) {
       console.log("success ", createdList);
@@ -57,38 +53,36 @@ const ListForm = ({ boardId }: { boardId: string }) => {
     // TODO: make it blur like loading and can't click
   }
   return (
-    <div>
-      <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-        <PopoverTrigger className="flex w-full justify-start rounded border border-stone-800 p-2 px-2">
-          <Plus />
-          Add a List
-        </PopoverTrigger>
-        <PopoverContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>List's title</FormLabel>
-                    <FormControl>
-                      <Input
-                        // disabled={pending}
-                        placeholder="Enter list name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormSubmit>Submit</FormSubmit>
-            </form>
-          </Form>
-        </PopoverContent>
-      </Popover>
-    </div>
+    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+      <PopoverTrigger className="flex rounded border border-stone-800 p-2 px-2">
+        <Plus />
+        Add a List
+      </PopoverTrigger>
+      <PopoverContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>List's title</FormLabel>
+                  <FormControl>
+                    <Input
+                      // disabled={pending}
+                      placeholder="Enter list title"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormSubmit>Submit</FormSubmit>
+          </form>
+        </Form>
+      </PopoverContent>
+    </Popover>
   );
 };
 
