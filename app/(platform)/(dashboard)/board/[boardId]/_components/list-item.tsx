@@ -75,7 +75,13 @@ const ListItem = ({
                 {...provided.droppableProps}
               >
                 {list.cards.map((card: any, index: number) => (
-                  <CardItem index={index} card={card} key={card.id} />
+                  <CardItem
+                    listId={list.id}
+                    boardId={boardId}
+                    index={index}
+                    card={card}
+                    key={card.id}
+                  />
                 ))}
 
                 <CardForm boardId={boardId} listId={list.id} />
