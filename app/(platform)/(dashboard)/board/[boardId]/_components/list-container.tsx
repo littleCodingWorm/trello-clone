@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import type { ListWithCards } from "@/types";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import ListForm from "./list-form";
+import { updateListOrder } from "@/actions/update-list-order";
+import { useRouter } from "next/navigation";
 
 function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   const result = Array.from(list);
@@ -23,13 +25,14 @@ const ListContainer = ({
 }) => {
   // fetch lists of this dude?
   const [orderedData, setOrderedData] = useState(lists);
+  const router = useRouter();
 
   // real time whenever the list is updated
   useEffect(() => {
     setOrderedData(lists);
   }, [lists]);
 
-  function handleOnDragEnd(result: any) {
+  async function handleOnDragEnd(result: any) {
     const { destination, type, source } = result;
     // if user doesn't drop it
     if (!destination) return;
@@ -39,7 +42,11 @@ const ListContainer = ({
       const items = reorder(orderedData, source.index, destination.index).map(
         (item, index) => ({ ...item, order: index }),
       );
+
       setOrderedData(items);
+
+      const updatedLists = await updateListOrder({ items, boardId });
+      // call update list order and pass data into it
     }
 
     // User moves a card

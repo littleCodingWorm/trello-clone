@@ -29,6 +29,8 @@ const BoardIdPage = async ({ params }: { params: { boardId: string } }) => {
       order: "asc",
     },
   });
+
+  // const reOrderedList =
   return (
     <div className="flex gap-4 ">
       <ListContainer boardId={params.boardId} lists={lists} />
