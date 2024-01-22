@@ -67,7 +67,7 @@ const CardForm = ({ listId, boardId }: { listId: string; boardId: string }) => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Card's title</FormLabel>
+                  <FormLabel>Cards title</FormLabel>
                   <FormControl>
                     <Input
                       // disabled={pending}

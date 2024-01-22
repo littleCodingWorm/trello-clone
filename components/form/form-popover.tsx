@@ -63,7 +63,7 @@ const FormPopover = ({ orgId }: { orgId: string }) => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Board's name</FormLabel>
+                    <FormLabel>Boards name</FormLabel>
                     <FormControl>
                       <Input placeholder="my board" {...field} />
                     </FormControl>

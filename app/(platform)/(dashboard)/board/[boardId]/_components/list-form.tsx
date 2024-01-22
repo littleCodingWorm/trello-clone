@@ -66,7 +66,7 @@ const ListForm = ({ boardId }: { boardId: string }) => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>List's title</FormLabel>
+                  <FormLabel>Lists title</FormLabel>
                   <FormControl>
                     <Input
                       // disabled={pending}
