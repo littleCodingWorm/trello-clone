@@ -1,7 +1,9 @@
 import React from "react";
+import { db } from "@/lib/db";
+
 import BoardNavbar from "./_components/board-navbar";
 
-const BoardIdLayout = ({
+const BoardIdLayout = async ({
   children,
   params,
 }: {
@@ -10,8 +12,17 @@ const BoardIdLayout = ({
 }) => {
   const { boardId } = params;
 
+  const board = await db.board.findUnique({
+    where: {
+      id: boardId,
+    },
+  });
+
   return (
-    <main>
+    <main
+      className="h-full w-full bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('${board?.imageUrl}')` }}
+    >
       <BoardNavbar boardId={boardId} />
       <div className="p-4">{children}</div>
     </main>
