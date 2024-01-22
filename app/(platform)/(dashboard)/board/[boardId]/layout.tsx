@@ -1,5 +1,5 @@
 import React from "react";
-import BoardMenu from "./_components/board-menu";
+import BoardNavbar from "./_components/board-navbar";
 
 const BoardIdLayout = ({
   children,
@@ -12,10 +12,7 @@ const BoardIdLayout = ({
 
   return (
     <main>
-      <div className="flex items-center justify-between bg-blue-200 p-2">
-        <span>Board's name</span>
-        <BoardMenu boardId={boardId} />
-      </div>
+      <BoardNavbar boardId={boardId} />
       <div className="p-4">{children}</div>
     </main>
   );
