@@ -22,7 +22,7 @@ model List {
   id      String  @id @default(auto()) @map("_id") @db.ObjectId
   title   String
   order   Int
-  Board   Board?  @relation(fields: [boardId], references: [id])
+  Board   Board?  @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId String? @db.ObjectId
 
   cards Card[]
