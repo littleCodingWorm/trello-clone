@@ -22,6 +22,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import FormPicker from "./form-picker";
+import Hint from "../hint";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -50,9 +51,32 @@ const FormPopover = ({ orgId }: { orgId: string }) => {
     router.push(`/board/${createdBoard.id}`); // how
   }
 
+  function handleUpgrade() {
+    alert("give me money");
+  }
+
   return (
     <Popover>
-      <PopoverTrigger>Open</PopoverTrigger>
+      <PopoverTrigger className="relative aspect-video h-full w-full rounded bg-secondary p-3 transition hover:bg-black/10">
+        <span>Create new board</span> <br />
+        <span className="text-sm">5 remaining</span>
+        <div className="group absolute bottom-3 right-3">
+          <Hint>
+            <div className="flex flex-col text-start">
+              <p>
+                Free Workspaces can have up to 10 open boards. For unlimited
+                boards, upgrade this Workspace.
+              </p>
+              <div
+                onClick={handleUpgrade}
+                className="justify-start px-0 font-semibold text-sky-700"
+              >
+                Upgrade
+              </div>
+            </div>
+          </Hint>
+        </div>
+      </PopoverTrigger>
       <PopoverContent>
         <div>
           <Form {...form}>
@@ -63,7 +87,7 @@ const FormPopover = ({ orgId }: { orgId: string }) => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Board's name</FormLabel>
+                    <FormLabel>Boards name</FormLabel>
                     <FormControl>
                       <Input placeholder="my board" {...field} />
                     </FormControl>
