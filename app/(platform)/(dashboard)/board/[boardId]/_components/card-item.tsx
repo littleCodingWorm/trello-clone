@@ -36,7 +36,7 @@ const CardItem = ({
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             role="button"
-            className="group rounded-md border border-transparent  bg-white hover:border-black"
+            className="group rounded-md border bg-white  transition hover:bg-gray-200"
           >
             <div className="flex items-center justify-between p-2">
               <span className="font-[500]">{card.title}</span>
