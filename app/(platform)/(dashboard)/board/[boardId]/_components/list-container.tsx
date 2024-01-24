@@ -44,8 +44,8 @@ const ListContainer = ({
       );
 
       setOrderedData(items);
-
       const updatedLists = await updateListOrder({ items, boardId });
+
       // call update list order and pass data into it
     }
 
@@ -111,6 +111,7 @@ const ListContainer = ({
         });
 
         setOrderedData(newOrderedData);
+        // update card order
       }
     }
   }

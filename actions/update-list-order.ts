@@ -25,6 +25,6 @@ export const updateListOrder = async ({
     return newList;
   });
 
-  revalidatePath(`/board/${boardId}`);
+  // revalidatePath(`/board/${boardId}`);
   return updatedLists;
 };
