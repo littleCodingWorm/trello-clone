@@ -54,7 +54,7 @@ const ListForm = ({ boardId }: { boardId: string }) => {
   }
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-      <PopoverTrigger className="flex rounded border border-stone-800 p-2 px-2">
+      <PopoverTrigger className="flex w-[272px] shrink-0 rounded bg-gray-300  p-4">
         <Plus />
         Add a List
       </PopoverTrigger>

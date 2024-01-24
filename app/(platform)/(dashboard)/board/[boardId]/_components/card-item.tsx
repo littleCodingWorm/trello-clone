@@ -36,10 +36,10 @@ const CardItem = ({
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             role="button"
-            className="group rounded-md border border-transparent  bg-yellow-200 hover:border-black"
+            className="group rounded-md border border-transparent  bg-white hover:border-black"
           >
             <div className="flex items-center justify-between p-2">
-              <span>{card.title}</span>
+              <span className="font-[500]">{card.title}</span>
               <Dialog>
                 <DialogTrigger>
                   <Pen className="hidden h-4 w-4 text-muted-foreground group-hover:block" />

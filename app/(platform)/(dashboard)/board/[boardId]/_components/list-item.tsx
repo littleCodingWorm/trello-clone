@@ -36,10 +36,10 @@ const ListItem = ({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="h-full w-[272px] rounded-md bg-blue-200 p-2"
+          className="w-[272px] shrink-0 rounded-md bg-gray-300 p-4"
         >
           <div className="flex items-center justify-between">
-            <span>{list.title}</span>
+            <span className="font-bold">{list.title}</span>
             <Popover>
               <PopoverTrigger>
                 <MoreHorizontalIcon />
@@ -70,7 +70,7 @@ const ListItem = ({
           <Droppable droppableId={list.id} type="card">
             {(provided) => (
               <ul
-                className="mt-4 flex flex-col gap-2"
+                className="mt-3 flex flex-col gap-2"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
@@ -83,9 +83,8 @@ const ListItem = ({
                     key={card.id}
                   />
                 ))}
-
-                <CardForm boardId={boardId} listId={list.id} />
                 {provided.placeholder}
+                <CardForm boardId={boardId} listId={list.id} />
               </ul>
             )}
           </Droppable>

@@ -32,7 +32,7 @@ const BoardIdPage = async ({ params }: { params: { boardId: string } }) => {
 
   // const reOrderedList =
   return (
-    <div className="flex gap-4 ">
+    <div className="flex h-full gap-4 ">
       <ListContainer boardId={params.boardId} lists={lists} />
     </div>
   );

@@ -55,7 +55,7 @@ const CardForm = ({ listId, boardId }: { listId: string; boardId: string }) => {
 
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-      <PopoverTrigger className="flex w-full justify-start rounded border border-stone-800 p-2 px-2">
+      <PopoverTrigger className="flex w-full justify-start rounded p-2 px-2 font-[600]">
         <Plus />
         Add a Card
       </PopoverTrigger>

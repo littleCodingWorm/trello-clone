@@ -25,7 +25,7 @@ const ListContainer = ({
 }) => {
   // fetch lists of this dude?
   const [orderedData, setOrderedData] = useState(lists);
-  const router = useRouter();
+  // const router = useRouter();
 
   // real time whenever the list is updated
   useEffect(() => {
@@ -118,14 +118,11 @@ const ListContainer = ({
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="lists" type="list" direction="horizontal">
-        {(provided, snapshot) => (
+        {(provided) => (
           <ul
             ref={provided.innerRef}
-            style={{
-              backgroundColor: snapshot.isDraggingOver ? "blue" : "grey",
-            }}
             {...provided.droppableProps}
-            className="flex gap-4"
+            className="scrollable-div flex h-full w-full items-start gap-4 overflow-x-scroll px-4"
           >
             {orderedData.map((list, index) => (
               <ListItem

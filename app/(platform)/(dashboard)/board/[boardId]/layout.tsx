@@ -20,11 +20,11 @@ const BoardIdLayout = async ({
 
   return (
     <main
-      className="h-full w-full bg-cover bg-center bg-no-repeat"
+      className="board-main-height w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url('${board?.imageUrl}')` }}
     >
       <BoardNavbar boardId={boardId} />
-      <div className="p-4">{children}</div>
+      <div className="h-full py-4 pb-0 pt-12">{children}</div>
     </main>
   );
 };

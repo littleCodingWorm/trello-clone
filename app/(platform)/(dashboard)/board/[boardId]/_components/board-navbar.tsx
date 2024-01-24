@@ -10,7 +10,7 @@ const BoardNavbar = async ({ boardId }: { boardId: string }) => {
     },
   });
   return (
-    <div className="flex items-center justify-between bg-black/60 p-2">
+    <div className="absolute flex w-full items-center justify-between bg-black/60 p-2">
       <BoardTitleForm boardId={boardId} boardTitle={board?.title} />
       <BoardMenu boardId={boardId} />
     </div>
