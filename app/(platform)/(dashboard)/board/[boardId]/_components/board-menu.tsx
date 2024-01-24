@@ -7,11 +7,14 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import DeleteBoardBtn from "./delete-board-btn";
+import { MoreHorizontal } from "lucide-react";
 
 const BoardMenu = ({ boardId }: { boardId: string }) => {
   return (
     <Sheet>
-      <SheetTrigger>Open</SheetTrigger>
+      <SheetTrigger>
+        <MoreHorizontal className="text-white" />
+      </SheetTrigger>
       <SheetContent side="right" className="w-[400px] sm:w-[540px]">
         <SheetHeader>
           <SheetTitle>Board Menu</SheetTitle>

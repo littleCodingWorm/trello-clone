@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { UpdateBoardTitle } from "@/actions/update-board-title";
+import { Divide, X } from "lucide-react";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -57,14 +58,28 @@ const BoardTitleForm = ({
           <FormField
             control={form.control}
             name="title"
-            render={({ field }) => <Input {...field} />}
+            render={({ field }) => (
+              <div className="flex">
+                <input
+                  autoFocus
+                  className="border-none bg-transparent font-bold text-white outline-none focus:border-none focus:outline-none"
+                  {...field}
+                />
+                <button type="button" onClick={() => disableEditing()}>
+                  <X className="text-white" />
+                </button>
+              </div>
+            )}
           />
         </form>
       </Form>
     );
   } else {
     return (
-      <div className="hover:cursor-pointer" onClick={() => setIsEditing(true)}>
+      <div
+        className="font-bold text-white hover:cursor-pointer"
+        onClick={() => setIsEditing(true)}
+      >
         {title}
       </div>
     );
